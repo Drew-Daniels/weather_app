@@ -1,0 +1,20 @@
+@use 'reset';
+@use 'font';
+@use 'color';
+@use 'layout';
+
+
+.btn-base {
+  display: flex;
+  align-items: center;
+  background:transparent;
+  border: none;
+}
+
+.fancy-btn {
+  background: turquoise;
+}
+
+.github-icon {
+  height: 2em;
+}
