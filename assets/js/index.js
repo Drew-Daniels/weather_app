@@ -15,7 +15,7 @@ function getFilledCurrentWeatherQryStr(city) {
 }
 
 function getFilledOneCallAPIQryStr(lat, lon) {
-  return `lat=${lat}&lon=${lon}&exclude=minutely&appid=${API_KEY}`;
+  return `lat=${lat}&lon=${lon}&units=Imperial&exclude=minutely&appid=${API_KEY}`;
 }
 
 function getFullURL(baseURL, qryStr) {
@@ -30,10 +30,8 @@ async function main() {
   const fullCurrentWeatherURL = getFullURL(CURRENT_WEATHER_DATA_URL, currentWeatherQryStr);
   const currentWeatherResponse = await fetch(fullCurrentWeatherURL);
   const currentWeatherData = await currentWeatherResponse.json();
-  console.log(currentWeatherData);
   const lat = currentWeatherData.coord.lat;
   const lon = currentWeatherData.coord.lon;
-  console.log(lat, lon);
   const oneCallAPIQryStr = getFilledOneCallAPIQryStr(lat, lon);
   const fullOneCallAPIURL = getFullURL(ONE_CALL_API_URL, oneCallAPIQryStr);
   const oneCallAPIResponse = await fetch(fullOneCallAPIURL);
