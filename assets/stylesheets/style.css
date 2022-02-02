@@ -85,6 +85,11 @@ html, body {
   background: turquoise;
 }
 
+.github-profile-container {
+  display: flex;
+  justify-content: center;
+}
+
 .github-icon {
   height: 2em;
 }
