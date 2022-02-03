@@ -58,9 +58,10 @@
   height: 22em;
   background: rgb(235, 234, 234);
   border: solid rgb(170, 170, 170) 1px;
-  border-radius: 4%;
+  border-radius: 2%;
   margin-right: 1em;
   margin-bottom: 1em;
+  padding: 1em 0;
 }
 .panel-row {
   display: flex;
@@ -70,5 +71,11 @@
 .panel-row-img-container {
   width: 2em;
   margin-left: 1em;
+  margin-right: 1em;
+}
+.panel-row-text-container {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
   margin-right: 1em;
 }
