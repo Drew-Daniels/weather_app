@@ -123,7 +123,7 @@ html, body {
   display: flex;
   flex-direction: column;
   width: 15em;
-  height: 20em;
+  height: 22em;
   background: #ebeaea;
   border: solid #aaaaaa 1px;
   border-radius: 4%;
@@ -140,7 +140,7 @@ html, body {
 .panel-row-img-container {
   width: 2em;
   margin-left: 1em;
-  margin-right: 2em;
+  margin-right: 1em;
 }
 
 .btn-base {
@@ -203,6 +203,11 @@ html, body {
 .city-text {
   font-size: 3em;
   text-align: center;
+}
+
+.label-text {
+  font-weight: 600;
+  color: #3ba2dd;
 }
 
 /*# sourceMappingURL=style.css.map */
