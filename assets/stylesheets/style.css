@@ -64,14 +64,68 @@ html, body {
 
 .content {
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  margin-top: 3em;
+}
+
+.ui {
+  margin-top: 1em;
 }
 
 .footer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   height: 5em;
+  margin-top: 1em;
+}
+
+.footer > * {
+  padding-bottom: 0.25em;
+}
+
+.searchbar {
+  display: flex;
+  height: 2em;
+  border: solid black 1px;
+  border-radius: 4%;
+  margin-bottom: 2em;
+}
+
+.searchbar-input {
+  border: none;
+}
+
+.searchbar-img {
+  height: 100%;
+}
+
+.panels {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+  flex-wrap: wrap;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: 15em;
+  height: 20em;
+  background: gray;
+  border: solid black 1px;
+}
+
+.panel-row {
+  display: flex;
 }
 
 .btn-base {
@@ -90,6 +144,10 @@ html, body {
   justify-content: center;
 }
 
+.github-profile-container > * {
+  padding-right: 0.25em;
+}
+
 .github-icon {
   height: 2em;
 }
@@ -104,6 +162,32 @@ html, body {
 
 .weather-icon {
   height: 100%;
+}
+
+.header-text {
+  font-size: 2em;
+}
+
+.btn-base {
+  border: none;
+  background: transparent;
+}
+
+.banner {
+  display: flex;
+}
+
+.banner-img {
+  height: 5em;
+}
+
+.banner-text {
+  font-size: 4em;
+}
+
+.city-text {
+  font-size: 3em;
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,5 +1,5 @@
-const searchBox = document.querySelector('input');
-const searchBtn = document.querySelector('button');
+const searchBox = document.querySelector('.input-searchbox');
+const searchBtn = document.querySelector('.btn-searchbox');
 const displayElement = document.querySelector('p');
 
 const API_KEY = '9337f92135b1f0193cefc57b9b2c3d3b';
@@ -23,6 +23,7 @@ function getFullURL(baseURL, qryStr) {
 }
 
 searchBtn.addEventListener('click', main);
+
 
 async function main() {
   const city = getCity();

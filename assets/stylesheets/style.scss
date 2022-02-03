@@ -3,23 +3,22 @@
 @use 'color';
 @use 'layout';
 
-
 .btn-base {
   display: flex;
   align-items: center;
   background:transparent;
   border: none;
 }
-
 .fancy-btn {
   background: turquoise;
 }
-
 .github-profile-container {
   display: flex;
   justify-content: center;
 }
-
+.github-profile-container > * {
+  padding-right: .25em;
+}
 .github-icon {
   height: 2em;
 }
@@ -31,4 +30,24 @@
 }
 .weather-icon {
   height: 100%;
+}
+.header-text {
+  font-size: 2em;
+}
+.btn-base {
+  border: none;
+  background: transparent;
+}
+.banner {
+  display: flex;
+}
+.banner-img {
+  height: 5em;
+}
+.banner-text {
+  font-size: 4em;
+}
+.city-text {
+  font-size: 3em;
+  text-align: center;
 }

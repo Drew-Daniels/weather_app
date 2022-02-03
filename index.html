@@ -9,34 +9,37 @@
   </head>
   <body class="content-container">
     <div class="content">
-      <header></header>
-      <main>
-        <input type="text" placeholder="Enter your city here">
-        <button class="btn-base fancy-btn">
-          <img src="assets/images/icons/search-icon.svg" alt="Location Search image">
-          <span>Get Weather</span>
-        </button>
-        <div class="weather-icons">
-          <div class="weather-icon-container">
-            <img src="assets/images/icons/clear-icon.svg" alt="" class="weather-icon">
-          </div>
-          <div class="weather-icon-container">
-            <img src="assets/images/icons/clouds-icon.svg" alt="" class="weather-icon">
-          </div>
-          <div class="weather-icon-container">
-            <img src="assets/images/icons/drizzle-icon.svg" alt="" class="weather-icon">
-          </div>
-          <div class="weather-icon-container">
-            <img src="assets/images/icons/rain-icon.svg" alt="" class="weather-icon">
-          </div>
-          <div class="weather-icon-container">
-            <img src="assets/images/icons/snow-icon.svg" alt="" class="weather-icon">
-          </div>
-          <div class="weather-icon-container">
-            <img src="assets/images/icons/thunderstorm-icon.svg" alt="" class="weather-icon">
+      <header class="header">
+        <div class="banner">
+          <img src="assets/images/icons/weather-app-icon.svg" alt="" class="banner-img">
+          <h1 class="banner-text">Weather App</h1>
+        </div>
+        <div class="ui">
+          <div class="searchbar">
+            <input type="text" placeholder="Enter your city here" class="searchbar-input">
+            <button class="btn-base btn-searchbox">
+              <img src="assets/images/icons/search-icon.svg" alt="Magnifying Glass Icon" class="searchbar-img">
+            </button>
           </div>
         </div>
-        <p></p>
+        <div>
+          <p>Displaying weather results for:</p>
+          <p class="city-text">Austin</p>
+        </div>
+      </header>
+      <main class="panels">
+        <div class="panel">
+          <div class="panel-row">
+            <img src="assets/images/icons/clear-icon.svg" alt="" class="weather-graphic">
+            <span class="weather-description">Clear</span>
+          </div>
+        </div>
+        <div class="panel"></div>
+        <div class="panel"></div>
+        <div class="panel"></div>
+        <div class="panel"></div>
+        <div class="panel"></div>
+        <div class="panel"></div>
       </main>
     </div>
     <footer class="footer">
@@ -44,7 +47,8 @@
         <img class="github-icon" src="assets/images/icons/github-icon.png">
       </a>
       <div class="github-profile-container">
-          Created by <a href="https://github.com/Drew-Daniels">Drew Daniels</a>
+        <span>Created by</span>
+        <a href="https://github.com/Drew-Daniels">Drew Daniels</a>
       </div>
     </footer>
   </body>
