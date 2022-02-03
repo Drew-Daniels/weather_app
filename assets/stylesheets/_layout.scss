@@ -29,17 +29,20 @@
 .footer > * {
   padding-bottom: .25em;
 }
-.searchbar {
+.searchbox {
   display: flex;
   height: 2em;
-  border: solid black 1px;
+  border: solid rgb(235, 234, 234) 1px;
   border-radius: 4%;
   margin-bottom: 2em;
 }
-.searchbar-input {
+.searchbox-input {
   border: none;
 }
-.searchbar-img {
+.searchbox-input:focus {
+  outline: none;
+}
+.searchbox-img {
   height: 100%;
 }
 .panels {
@@ -53,9 +56,19 @@
   flex-direction: column;
   width: 15em;
   height: 20em;
-  background: gray;
-  border: solid black 1px;
+  background: rgb(235, 234, 234);
+  border: solid rgb(170, 170, 170) 1px;
+  border-radius: 4%;
+  margin-right: 1em;
+  margin-bottom: 1em;
 }
 .panel-row {
   display: flex;
+  align-items: center;
+  width: 100%;
+}
+.panel-row-img-container {
+  width: 2em;
+  margin-left: 1em;
+  margin-right: 2em;
 }
