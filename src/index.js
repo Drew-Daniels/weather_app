@@ -3,11 +3,6 @@ import {format} from 'date-fns';
 import DOM from './dom';
 import APP from './app';
 
-const searchBoxInput = document.querySelector('.searchbox-input');
-const searchBoxBtn = document.querySelector('.searchbox-btn');
-const cityText = document.querySelector('.city-text');
-const displayElement = document.querySelector('p');
-
 const API_KEY = '9337f92135b1f0193cefc57b9b2c3d3b';
 const CURRENT_WEATHER_DATA_URL = 'http://api.openweathermap.org/data/2.5/weather?';
 const ONE_CALL_API_URL = 'https://api.openweathermap.org/data/2.5/onecall?';
@@ -32,19 +27,9 @@ function getDateFromUnixTS(unixTimestamp) {
   return new Date(unixTimestamp * 1000);
 }
 
-searchBoxBtn.addEventListener('click', main);
-searchBoxInput.addEventListener('keyup', function(e) {
-  if (e.keyCode === 13) {
-    searchBoxBtn.click();
-  }
-});
 
-function startup() {
-  const webpageTitle = document.querySelector('title');
-  webpageTitle.innerText = "Weather App";
-}
 
-async function main() {
+async function refresh() {
   const city = getCity();
   const currentWeatherQryStr = getFilledCurrentWeatherQryStr(city);
   const fullCurrentWeatherURL = getFullURL(CURRENT_WEATHER_DATA_URL, currentWeatherQryStr);
@@ -71,3 +56,9 @@ async function main() {
     console.log(formattedDate);
   }
 }
+
+function main() {
+  DOM.startup();
+}
+
+main();

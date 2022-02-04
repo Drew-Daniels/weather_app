@@ -13,7 +13,9 @@ module.exports = {
     static: './dist',
   },
   plugins: [
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'Weather App'
+    }),
   ],
   output: {
     filename: '[name].bundle.js',
