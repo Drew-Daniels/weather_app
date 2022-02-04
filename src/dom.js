@@ -1,6 +1,9 @@
+import {format} from 'date-fns';
+
 import weatherAppIcon from './images/icons/weather-app-icon.svg';
 import githubIcon from './images/icons/github-icon.png';
 import searchIcon from './images/icons/search-icon.svg';
+import dateIcon from './images/icons/date-icon.svg';
 // const searchBoxInput = document.querySelector('.searchbox-input');
 // const searchBoxBtn = document.querySelector('.searchbox-btn');
 // const cityText = document.querySelector('.city-text');
@@ -107,7 +110,7 @@ function getImgAndSpanButton(
 function getSearchbox() {
   const searchbox = getDOMNode('div', 'searchbox');
   const searchboxInput = getTextInput('Enter your city', 'searchbox-input');
-  const searchboxButton = getImgButton(searchIcon, 'Magnifying Glass', 'searchbox-img', 'btn-base', 'searchbox-btn');
+  const searchboxButton = getImgButton(searchIcon, 'Magnifying Glass', ['searchbox-img'], 'btn-base', 'searchbox-btn');
   searchbox.append(searchboxInput, searchboxButton);
   return searchbox;
 }
@@ -127,6 +130,71 @@ function getHeader(...classes) {
 
   header.append(banner, ui);
   return header;
+}
+
+function getPanelRowImgContainer() {
+  const imgContainer = getDOMNode('div', 'panel-row-img-container');
+  return imgContainer;
+}
+
+function getPanelRowTextContainer() {
+  const textContainer = getDOMNode('div', 'panel-row-text-container');
+  return textContainer;
+}
+
+function getDiv(...classes) {
+  const div = getDOMNode('div', ...classes);
+  return div;
+}
+
+function getDateFromUnixTS(unixTimestamp) {
+  return new Date(unixTimestamp * 1000);
+}
+
+function getPanelRowDate(unixTimestamp) {
+  const date = getDateFromUnixTS(unixTimestamp);
+  const frmtDate = format(date, 'MM/dd/yyyy');
+  const row = getPanelRow();
+  const imgContainer = row.querySelector('panel-row-img-container');
+  const img = getImage(dateIcon, 'Calendar');
+  imgContainer.appendChild(img);
+
+  const textContainer = row.querySelector('panel-row-text-container');
+  const label = getSpan('Date:', 'label-text');
+  const dateContainer = getDiv('date-container');
+  const dateSpan = getSpan(formattedDate, 'date-span');
+  dateContainer.appendChild(dateSpan);
+  textContainer.append(label, dateContainer);
+
+  return row;
+}
+
+function getPanelRow() {
+  const row = getDOMNode('div', 'panel-row');
+  const imgContainer = getPanelRowImgContainer();
+  const textContainer = getPanelRowTextContainer();
+  row.append(imgContainer, textContainer);
+  return row;
+}
+
+function getPanel(dailyForecastObject) {
+  getPanelRowDate(dailyForecastObject)
+  // getPanelRowStatus
+  // getPanelRowActualTemp
+  // getPanelRowFeelsLikeTemp
+  // getPanelRowHighTemp
+  // getPanelRowLowTemp
+  // getPanelRowSunrise
+  // getPanelRowSunset
+  // getPanelRowRainProbability
+  // getPanelRowHumidity
+  // getPanelRowWind
+  // getPanelRowUVIndex
+
+}
+
+function getPanels() {
+  
 }
 
 function getMain(...classes) {
@@ -193,7 +261,9 @@ function getFooter() {
   footerNode.append(githubAppAnchor, githubProfileContainer);
   return footerNode;
 }
-
+/**
+ * Creates the DOM elements to display on the webpage
+ */
 function startup() {
   // HEAD
   const head = document.querySelector('head');
@@ -206,8 +276,19 @@ function startup() {
   const content = getContentContainer();
   const footer = getFooter();
   body.append(content, footer);
+
+}
+
+/**
+ * Takes an array of daily forecast objects and uses them to refresh all DOM elements
+ * on the webpage
+ * @param {*} forecastData 
+ */
+function refresh(forecastData) {
+
 }
 
 export default {
   startup,
+  refresh,
 }
