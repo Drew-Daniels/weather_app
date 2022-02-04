@@ -1,3 +1,8 @@
+import './style.css';
+import {format} from 'date-fns';
+import DOM from './dom';
+import APP from './app';
+
 const searchBoxInput = document.querySelector('.searchbox-input');
 const searchBoxBtn = document.querySelector('.searchbox-btn');
 const cityText = document.querySelector('.city-text');
@@ -23,6 +28,10 @@ function getFullURL(baseURL, qryStr) {
   return baseURL + qryStr;
 }
 
+function getDateFromUnixTS(unixTimestamp) {
+  return new Date(unixTimestamp * 1000);
+}
+
 searchBoxBtn.addEventListener('click', main);
 searchBoxInput.addEventListener('keyup', function(e) {
   if (e.keyCode === 13) {
@@ -30,13 +39,17 @@ searchBoxInput.addEventListener('keyup', function(e) {
   }
 });
 
+function startup() {
+  const webpageTitle = document.querySelector('title');
+  webpageTitle.innerText = "Weather App";
+}
+
 async function main() {
   const city = getCity();
   const currentWeatherQryStr = getFilledCurrentWeatherQryStr(city);
   const fullCurrentWeatherURL = getFullURL(CURRENT_WEATHER_DATA_URL, currentWeatherQryStr);
   const currentWeatherResponse = await fetch(fullCurrentWeatherURL);
   const currentWeatherData = await currentWeatherResponse.json();
-  console.log(currentWeatherData.message);
   if (currentWeatherData.message) {
     //handle
     
@@ -49,7 +62,12 @@ async function main() {
     const fullOneCallAPIURL = getFullURL(ONE_CALL_API_URL, oneCallAPIQryStr);
     const oneCallAPIResponse = await fetch(fullOneCallAPIURL);
     const oneCallAPIData = await oneCallAPIResponse.json();
+
     console.log(oneCallAPIData.daily);
-    console.log(oneCallAPIData.hourly);
+
+    const date = getDateFromUnixTS(oneCallAPIData.daily[0].sunset);
+    console.log(date);
+    const formattedDate = format(date, 'MM/dd/yyyy');
+    console.log(formattedDate);
   }
 }
