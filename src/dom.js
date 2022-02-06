@@ -4,17 +4,39 @@ import weatherAppIcon from './images/icons/weather-app-icon.svg';
 import githubIcon from './images/icons/github-icon.png';
 import searchIcon from './images/icons/search-icon.svg';
 import dateIcon from './images/icons/date-icon.svg';
-// const searchBoxInput = document.querySelector('.searchbox-input');
-// const searchBoxBtn = document.querySelector('.searchbox-btn');
-// const cityText = document.querySelector('.city-text');
-// const displayElement = document.querySelector('p');
+import clearIcon from './images/icons/clear-icon.svg';
+import actualTempIcon from './images/icons/actual-temp-icon.svg';
+import feelsLikeTempIcon from './images/icons/feels-like-temp-icon.svg';
+import highIcon from './images/icons/high-icon.svg';
+import lowIcon from './images/icons/low-icon.svg';
+import sunriseIcon from './images/icons/sunrise-icon.svg';
+import sunsetIcon from './images/icons/sunset-icon.svg';
+import rainProbIcon from './images/icons/rain-prob-icon.svg';
+import humidityIcon from './images/icons/humidity-icon.svg';
+import windIcon from './images/icons/wind-icon.svg';
+import uvIndexIcon from './images/icons/uv-index-icon.svg';
 
-// searchBoxBtn.addEventListener('click', main);
+const day0 = new Date();
+const day1 = getOffsetDateFromToday(1)
+const day2 = getOffsetDateFromToday(2)
+const day3 = getOffsetDateFromToday(3)
+const day4 = getOffsetDateFromToday(4)
+const day5 = getOffsetDateFromToday(5)
+const day6 = getOffsetDateFromToday(6)
+
 // searchBoxInput.addEventListener('keyup', function(e) {
 //   if (e.keyCode === 13) {
 //     searchBoxBtn.click();
 //   }
 // });
+
+function getOffsetDate(date, offset) {
+  return new Date(new Date().setDate((date.getDate() + offset)));
+}
+
+function getOffsetDateFromToday(offset) {
+  return getOffsetDate(new Date(), offset);
+}
 
 /**
  * Creates and returns a DOM node with the listed classes (if any) added
@@ -151,21 +173,185 @@ function getDateFromUnixTS(unixTimestamp) {
   return new Date(unixTimestamp * 1000);
 }
 
-function getPanelRowDate(unixTimestamp) {
-  const date = getDateFromUnixTS(unixTimestamp);
-  const frmtDate = format(date, 'MM/dd/yyyy');
+function getPanelRowDate() {
+  const [row, textContainer] = getPanelRowItems(dateIcon, 'Calendar', 'Date:');
+
+  const dateContainer = getDiv('date-container');
+  const dateSpan = getSpan(format(new Date(), 'MM/dd/yyyy'), 'date-span');
+  dateContainer.appendChild(dateSpan);
+  textContainer.append(dateContainer);
+
+  return row;
+}
+
+/**
+ * Creates a new Panel Row and returns the following in an array:
+ * - panelRow DOM node
+ * - textContainer DOM node
+ * @returns [row, textContainer]
+ */
+function getPanelRowItems(imagePath, imageAlt, labelText) {
   const row = getPanelRow();
-  const imgContainer = row.querySelector('panel-row-img-container');
-  const img = getImage(dateIcon, 'Calendar');
+  const imgContainer = row.querySelector('.panel-row-img-container');
+  const img = getImage(imagePath, imageAlt);
   imgContainer.appendChild(img);
 
-  const textContainer = row.querySelector('panel-row-text-container');
-  const label = getSpan('Date:', 'label-text');
-  const dateContainer = getDiv('date-container');
-  const dateSpan = getSpan(formattedDate, 'date-span');
-  dateContainer.appendChild(dateSpan);
-  textContainer.append(label, dateContainer);
+  const textContainer = row.querySelector('.panel-row-text-container');
+  const label = getSpan(labelText, 'label-text');
+  const valueContainer = getDiv();
+  textContainer.append(label, valueContainer);
 
+  return [row, valueContainer];
+}
+
+function getPanelRowSingleSpan(imagePath, imageAlt, labelText, spanValue, ...spanClasses) {
+  const [row, valueContainer] = getPanelRowItems(imagePath, imageAlt, labelText);
+  const span = getSpan(spanValue, ...spanClasses);
+  valueContainer.appendChild(span);
+
+  return row;
+}
+
+function getPanelRowItemsDoubleSpan(imagePath, imageAlt, labelText, span1Value, span1Classes, span2Value, span2Classes) {
+  const [row, valueContainer] = getPanelRowItems(imagePath, imageAlt, labelText);
+  const span1 = getSpan(span1Value, ...span1Classes);
+  const span2 = getSpan(span2Value, ...span2Classes);
+  valueContainer.append(span1, span2);
+  return row;
+}
+
+function getPanelRowStatus() {
+  const row = getPanelRowSingleSpan(
+    clearIcon, 
+    'Sun', 
+    'Status:', 
+    'Clear', 
+    'weather-description'
+  );
+  return row;
+}
+
+function getPanelRowActualTemp() {
+  const row = getPanelRowItemsDoubleSpan(
+    actualTempIcon, 
+    'Temperature Gauge with "A" adjacent', 
+    'Actual:', 
+    '76', 
+    ['actual-temperature-value'],
+    '°F', 
+    ['actual-temperature-units']
+  )
+  return row;
+}
+
+function getPanelRowFeelsLikeTemp() {
+  const row = getPanelRowItemsDoubleSpan(
+    feelsLikeTempIcon, 
+    'Temperature Gauge', 
+    'Feels Like:', 
+    '76', 
+    ['feels-like-temperature-value'], 
+    '°F', 
+    ['feels-like-temperature-units']
+  )
+  return row;
+}
+
+function getPanelRowHighTemp() {
+  const row = getPanelRowItemsDoubleSpan(
+    highIcon, 
+    'Upward Pointing Chevron', 
+    'High:', 
+    '80', 
+    ['high-temperature-value'], 
+    '°F', 
+    ['high-temperature-units'],
+  )
+  return row;
+}
+
+function getPanelRowLowTemp() {
+  const row = getPanelRowItemsDoubleSpan(
+    lowIcon,
+    'Downward Pointing Chevron',
+    'Low:',
+    '60',
+    ['low-temperature-value'],
+    '°F',
+    ['low-temperature-units'],
+  );
+  return row;
+}
+
+function getPanelRowSunrise() {
+  const row = getPanelRowSingleSpan(
+    sunriseIcon,
+    'Sunrise',
+    'Sunrise:',
+    '7:00AM',
+    'sunrise-value',
+  );
+  return row;
+}
+
+function getPanelRowSunset() {
+  const row = getPanelRowSingleSpan(
+    sunsetIcon,
+    'Sunset',
+    'Sunset:',
+    '7:00PM',
+    'sunset-value',
+  );
+  return row;
+}
+
+function getPanelRowRainProbability() {
+  const row = getPanelRowItemsDoubleSpan(
+    rainProbIcon,
+    'Umbrella',
+    'Rain Probability:',
+    '92',
+    'rain-probability-value',
+    '%',
+    'rain-probability-units',
+  );
+  return row;
+}
+
+function getPanelRowHumidity() {
+  const row = getPanelRowItemsDoubleSpan(
+    humidityIcon,
+    'Raindrop',
+    'Humidity:',
+    '92',
+    'humidity-value',
+    '%',
+    'humidity-units',
+  );
+  return row;
+}
+
+function getPanelRowWind() {
+  const row = getPanelRowItemsDoubleSpan(
+    windIcon,
+    'Squiggly Lines',
+    'Wind:',
+    '5',
+    'wind-value',
+    'MPH',
+    'wind-units',
+  );
+  return row;
+}
+
+function getPanelRowUVIndex() {
+  const row = getPanelRowSingleSpan(
+    uvIndexIcon,
+    'Sunglasses',
+    'UV Index:',
+    '4.63',
+    'uv-index-value',
+  );
   return row;
 }
 
@@ -177,29 +363,64 @@ function getPanelRow() {
   return row;
 }
 
-function getPanel(dailyForecastObject) {
-  getPanelRowDate(dailyForecastObject)
-  // getPanelRowStatus
-  // getPanelRowActualTemp
-  // getPanelRowFeelsLikeTemp
-  // getPanelRowHighTemp
-  // getPanelRowLowTemp
-  // getPanelRowSunrise
-  // getPanelRowSunset
-  // getPanelRowRainProbability
-  // getPanelRowHumidity
-  // getPanelRowWind
-  // getPanelRowUVIndex
+function getPanel() {
+  const panel = getDOMNode('div', 'panel');
+  const datePanelRow = getPanelRowDate();
+  const statusPanelRow = getPanelRowStatus();
+  const actualTempPanelRow = getPanelRowActualTemp();
+  const feelsLikeTempPanelRow = getPanelRowFeelsLikeTemp();
+  const highTempPanelRow = getPanelRowHighTemp();
+  const lowTempPanelRow = getPanelRowLowTemp();
+  const sunrisePanelRow = getPanelRowSunrise();
+  const sunsetPanelRow = getPanelRowSunset();
+  const rainProbabilityPanelRow = getPanelRowRainProbability();
+  const humidityPanelRow = getPanelRowHumidity();
+  const windPanelRow = getPanelRowWind();
+  const uvIndexPanelRow = getPanelRowUVIndex();
 
+  panel.append(
+    datePanelRow,
+    statusPanelRow,
+    actualTempPanelRow,
+    feelsLikeTempPanelRow,
+    highTempPanelRow,
+    lowTempPanelRow,
+    sunrisePanelRow,
+    sunsetPanelRow,
+    rainProbabilityPanelRow,
+    humidityPanelRow,
+    windPanelRow,
+    uvIndexPanelRow,
+  )
+  return panel;
 }
 
 function getPanels() {
-  
+  const panel0 = getPanel();
+  const panel1 = getPanel();
+  const panel2 = getPanel();
+  const panel3 = getPanel();
+  const panel4 = getPanel();
+  const panel5 = getPanel();
+  const panel6 = getPanel();
+
+  return [
+    panel0,
+    panel1,
+    panel2,
+    panel3,
+    panel4,
+    panel5,
+    panel6,
+  ]
 }
 
 function getMain(...classes) {
   const main = getDOMNode('main', ...classes);
-
+  const panels = getPanels();
+  panels.forEach(function(panel) {
+    main.appendChild(panel);
+  })
   return main;
 }
 
