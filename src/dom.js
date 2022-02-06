@@ -311,9 +311,9 @@ function getPanelRowRainProbability() {
     'Umbrella',
     'Rain Probability:',
     '92',
-    'rain-probability-value',
+    ['rain-probability-value'],
     '%',
-    'rain-probability-units',
+    ['rain-probability-units'],
   );
   return row;
 }
@@ -324,9 +324,9 @@ function getPanelRowHumidity() {
     'Raindrop',
     'Humidity:',
     '92',
-    'humidity-value',
+    ['humidity-value'],
     '%',
-    'humidity-units',
+    ['humidity-units'],
   );
   return row;
 }
@@ -337,9 +337,9 @@ function getPanelRowWind() {
     'Squiggly Lines',
     'Wind:',
     '5',
-    'wind-value',
+    ['wind-value'],
     'MPH',
-    'wind-units',
+    ['wind-units'],
   );
   return row;
 }
@@ -506,7 +506,66 @@ function startup() {
  * @param {*} forecastData 
  */
 function refresh(forecastData) {
+  const panels = document.querySelectorAll('.panel');
+  for (let i=0; i < forecastData.length-1; i++) {
+    const forecastDay = forecastData[i];
+    const panel = panels[i];
+    // GET values
+    const unixTS = forecastDay.dt;
+    const dtDate = getDateFromUnixTS(unixTS);
+    const frDate = format(dtDate, 'MM/dd/yyyy');
+    const dateEl = panel.querySelector('.date-span');
+    dateEl.textContent = frDate;
 
+    const status = forecastDay.weather[0].main;
+    const statusEl = panel.querySelector('.weather-description');
+    statusEl.textContent = status;
+
+    const actualTemp = forecastDay.temp.day;
+    const actualTempEl = panel.querySelector('.actual-temperature-value');
+    actualTempEl.textContent = actualTemp;
+
+    const feelsLikeTemp = forecastDay.feels_like.day;
+    const feelsLikeTempEl = panel.querySelector('.feels-like-temperature-value');
+    feelsLikeTempEl.textContent = feelsLikeTemp;
+
+    const highTemp = forecastDay.temp.max;
+    const highTempEl = panel.querySelector('.high-temperature-value');
+    highTempEl.textContent = highTemp;
+
+    const lowTemp = forecastDay.temp.min;
+    const lowTempEl = panel.querySelector('.low-temperature-value');
+    lowTempEl.textContent = lowTemp;
+
+    const unixSunriseTime = forecastDay.sunrise;
+    const dtSunriseTime = getDateFromUnixTS(unixSunriseTime);
+    const frSunriseTime = format(dtSunriseTime, 'hh:mm a');
+    const sunriseTimeEl = panel.querySelector('.sunrise-value');
+    sunriseTimeEl.textContent = frSunriseTime;
+
+    const unixSunsetTime = forecastDay.sunset;
+    const dtSunsetTime = getDateFromUnixTS(unixSunsetTime);
+    const frSunsetTime = format(dtSunsetTime, 'hh:mm a');
+    const sunsetTimeEl = panel.querySelector('.sunset-value');
+    sunsetTimeEl.textContent = frSunsetTime;
+
+    const rainProb = forecastDay.pop;
+    const rainProbEl = panel.querySelector('.rain-probability-value');
+    rainProbEl.textContent = rainProb;
+
+    const humidity = forecastDay.humidity;
+    const humidityEl = panel.querySelector('.humidity-value');
+    humidityEl.textContent = humidity;
+
+    const wind = forecastDay.wind_speed;
+    const windEl = panel.querySelector('.wind-value');
+    windEl.textContent = wind;
+
+    const uvIndex = forecastDay.uvi;
+    const uvIndexEl = panel.querySelector('.uv-index-value');
+    uvIndexEl.textContent = uvIndex;
+
+  }
 }
 
 export default {

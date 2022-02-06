@@ -15,7 +15,14 @@ function startup() {
 }
 
 function getCity() {
-  return searchboxInput.value;
+  const cityVal = searchboxInput.value;
+  let city;
+  if (!cityVal) {
+    return 'Austin'
+  } else {
+    city = cityVal;
+  }
+  return city;
 }
 
 function getFilledCurrentWeatherQryStr(city) {

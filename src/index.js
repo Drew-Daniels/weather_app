@@ -4,7 +4,6 @@ import APP from './app';
 
 async function router() {
   const data = await APP.getData();
-  console.log(data);
   DOM.refresh(data);
 }
 
@@ -23,3 +22,4 @@ function main() {
 }
 
 main();
+router();
