@@ -7,20 +7,20 @@ module.exports = {
     dom: './src/dom.js',
     index: './src/index.js',
   },
-  mode: 'development',
+  mode: 'production',
   devtool: 'inline-source-map',
   devServer: {
     static: './dist',
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Weather App'
+      title: 'Weather App',
+      filename: './index.html',
     }),
   ],
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    clean: true,
+    path: path.resolve(__dirname, '.'),
   },
   module: {
     rules: [
