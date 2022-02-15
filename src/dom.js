@@ -16,20 +16,6 @@ import humidityIcon from './images/icons/humidity-icon.svg';
 import windIcon from './images/icons/wind-icon.svg';
 import uvIndexIcon from './images/icons/uv-index-icon.svg';
 
-const day0 = new Date();
-const day1 = getOffsetDateFromToday(1)
-const day2 = getOffsetDateFromToday(2)
-const day3 = getOffsetDateFromToday(3)
-const day4 = getOffsetDateFromToday(4)
-const day5 = getOffsetDateFromToday(5)
-const day6 = getOffsetDateFromToday(6)
-
-// searchBoxInput.addEventListener('keyup', function(e) {
-//   if (e.keyCode === 13) {
-//     searchBoxBtn.click();
-//   }
-// });
-
 function getOffsetDate(date, offset) {
   return new Date(new Date().setDate((date.getDate() + offset)));
 }

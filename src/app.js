@@ -10,7 +10,7 @@ function startup() {
   cityText = document.querySelector('.city-text');
 
   API_KEY = '9337f92135b1f0193cefc57b9b2c3d3b';
-  CURRENT_WEATHER_DATA_URL = 'http://api.openweathermap.org/data/2.5/weather?';
+  CURRENT_WEATHER_DATA_URL = 'https://api.openweathermap.org/data/2.5/weather?';
   ONE_CALL_API_URL = 'https://api.openweathermap.org/data/2.5/onecall?';
 }
 
