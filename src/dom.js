@@ -1,5 +1,4 @@
 import {format} from 'date-fns';
-
 import weatherAppIcon from './images/icons/weather-app-icon.svg';
 import githubIcon from './images/icons/github-icon.png';
 import searchIcon from './images/icons/search-icon.svg';
