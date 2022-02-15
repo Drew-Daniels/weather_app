@@ -217,5 +217,10 @@ html, body {
   font-weight: 600;
   color: #3ba2dd;
 }
-
+.displayed-city-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 /*# sourceMappingURL=style.css.map */

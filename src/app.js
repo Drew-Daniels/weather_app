@@ -1,13 +1,12 @@
 let searchboxInput;
 let cityText;
-
 let API_KEY;
 let CURRENT_WEATHER_DATA_URL;
 let ONE_CALL_API_URL;
 
 function startup() {
   searchboxInput = document.querySelector('.searchbox-input');
-  cityText = document.querySelector('.city-text');
+  cityText = document.querySelector('.displayed-city-header');
 
   API_KEY = '9337f92135b1f0193cefc57b9b2c3d3b';
   CURRENT_WEATHER_DATA_URL = 'https://api.openweathermap.org/data/2.5/weather?';
@@ -50,9 +49,10 @@ async function getData() {
   const currentWeatherData = await currentWeatherResponse.json();
   if (currentWeatherData.message) {
     //handle
-    
+    throw new Error('Please enter a valid city');
   } else {
-    // cityText.innerText = currentWeatherData.name;
+    console.log(cityText);
+    cityText.textContent = currentWeatherData.name;
     const lat = currentWeatherData.coord.lat;
     const lon = currentWeatherData.coord.lon;
   

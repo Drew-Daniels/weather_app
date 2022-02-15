@@ -51,6 +51,18 @@ function getH1(h1Text, ...classes) {
   return h1;
 }
 
+function getH2(h2Text, ...classes) {
+  const h2 = getDOMNode('h2', ...classes);
+  h2.innerText = h2Text;
+  return h2;
+}
+
+function getH3(h3Text, ...classes) {
+  const h3 = getDOMNode('h3', ...classes);
+  h3.innerText = h3Text;
+  return h3;
+}
+
 function getBanner() {
   const banner = getDOMNode('div', 'banner');
   const bannerImg = getImage(weatherAppIcon, 'Hurricane symbol', 'banner-img');
@@ -131,12 +143,21 @@ function getUI() {
   return ui;
 }
 
+function getDisplayedCityContainer() {
+  const container = getDOMNode('div', 'displayed-city-container');
+  const displayedCityHeader = getH2('Austin', 'displayed-city-header');
+  const displayedCityPreface = getH3('Weather displayed is for:', 'displayed-city-preface');
+  container.append(displayedCityPreface, displayedCityHeader);
+  return container;
+}
+
 function getHeader(...classes) {
   const header = getDOMNode('header', ...classes);
   const banner = getBanner();
   const ui = getUI();
+  const displayedCityContainer = getDisplayedCityContainer();
 
-  header.append(banner, ui);
+  header.append(banner, ui, displayedCityContainer);
   return header;
 }
 
