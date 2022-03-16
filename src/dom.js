@@ -434,7 +434,8 @@ function getContentContainer() {
   const content = getDOMNode('div', 'content');
   const header = getHeader('header');
   const main = getMain('panels');
-  content.append(header, main);
+  const load = getDOMNode('div', 'load');
+  content.append(header, main, load);
   return content;
 }
 
@@ -492,6 +493,7 @@ function getFooter() {
  * Creates the DOM elements to display on the webpage
  */
 function startup() {
+
   // HEAD
   const head = document.querySelector('head');
   const favicon = getFavicon(weatherAppIcon);

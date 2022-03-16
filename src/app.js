@@ -51,7 +51,6 @@ async function getData() {
     //handle
     throw new Error('Please enter a valid city');
   } else {
-    console.log(cityText);
     cityText.textContent = currentWeatherData.name;
     const lat = currentWeatherData.coord.lat;
     const lon = currentWeatherData.coord.lon;
