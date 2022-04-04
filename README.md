@@ -1,2 +1,2 @@
 # Weather App
-![Alt text](./weather_app_screenshot.png?raw=true "Weather App Screenshot")
+![Alt text](./weather-app.gif?raw=true "Weather App gif")
